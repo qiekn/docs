@@ -4,15 +4,29 @@ Zensical documentation template.
 
 ## Usage
 
+Install with pip:
+
 ```bash
 git clone git@github.com:qiekn/docs.git my-project
 cd my-project
 
-python3 -m venv .venv
-source .venv/bin/activate
+python -m venv .venv
+.venv\Scripts\activate
 pip install zensical
 
 zensical serve
+```
+
+Install with uv:
+
+```bash
+git clone git@github.com:qiekn/docs.git my-project
+cd my-project
+
+uv init
+uv add --dev zensical
+
+uv run zensical serve
 ```
 
 ## Structure
