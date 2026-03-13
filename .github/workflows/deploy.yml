@@ -1,13 +1,17 @@
-name: Documentation
+name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, zensical, mdbook]
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -17,18 +21,58 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/configure-pages@v5
-      - uses: actions/checkout@v5
 
+      # Checkout all three branches
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          path: main-src
+
+      - uses: actions/checkout@v5
+        with:
+          ref: zensical
+          path: zensical-src
+
+      - uses: actions/checkout@v5
+        with:
+          ref: mdbook
+          path: mdbook-src
+
+      # Build Zensical
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: "3.x"
 
-      - run: pip install zensical
-      - run: zensical build --clean
+      - name: Build Zensical
+        run: |
+          pip install zensical
+          cd zensical-src
+          sed -i 's|^site_url = ""|site_url = "https://qiekn.github.io/docs/zensical/"|' zensical.toml
+          zensical build --clean
+
+      # Build mdBook
+      - name: Install mdBook
+        run: |
+          tag=$(curl -s https://api.github.com/repos/rust-lang/mdBook/releases/latest | grep '"tag_name"' | sed 's/.*"v\(.*\)".*/\1/')
+          curl -sSL "https://github.com/rust-lang/mdBook/releases/download/v${tag}/mdbook-v${tag}-x86_64-unknown-linux-gnu.tar.gz" | tar -xz
+          sudo mv mdbook /usr/local/bin/
+
+      - name: Build mdBook
+        run: |
+          cd mdbook-src
+          mdbook build
+
+      # Assemble _site/
+      - name: Assemble site
+        run: |
+          mkdir -p _site/zensical _site/mdbook
+          cp main-src/index.html _site/
+          cp -r zensical-src/site/* _site/zensical/
+          cp -r mdbook-src/book/* _site/mdbook/
 
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: site
+          path: _site
 
       - uses: actions/deploy-pages@v4
         id: deployment

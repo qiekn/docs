@@ -1,12 +1,5 @@
-# Python virtual environment
-.venv/
-venv/
-
-# Zensical build output
-site/
-
-# Cache
-.cache/
+# Build output
+_site/
 
 # System files
 .DS_Store

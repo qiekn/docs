@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>docs — Documentation Templates</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #f0f6fc; }
+    p.subtitle { color: #8b949e; margin-bottom: 2.5rem; }
+    .cards {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      width: 280px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: #58a6ff;
+      transform: translateY(-2px);
+    }
+    .card h2 { font-size: 1.25rem; color: #f0f6fc; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.875rem; color: #8b949e; line-height: 1.5; }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #484f58;
+    }
+    footer a { color: #58a6ff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>docs</h1>
+  <p class="subtitle">Documentation template previews</p>
+  <div class="cards">
+    <a class="card" href="zensical/">
+      <h2>Zensical</h2>
+      <p>Material-style documentation with search, dark mode, and rich Markdown extensions.</p>
+    </a>
+    <a class="card" href="mdbook/">
+      <h2>mdBook</h2>
+      <p>Lightweight Rust-powered book format, ideal for tutorials and technical guides.</p>
+    </a>
+  </div>
+  <footer>
+    <a href="https://github.com/qiekn/docs">github.com/qiekn/docs</a>
+  </footer>
+</body>
+</html>

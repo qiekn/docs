@@ -1,45 +1,30 @@
 # docs
 
-Zensical documentation template.
+Documentation template collection with live previews on GitHub Pages.
+
+**Live preview:** [qiekn.github.io/docs](https://qiekn.github.io/docs/)
+
+## Templates
+
+| Template | Preview | Clone |
+|----------|---------|-------|
+| Zensical | [Preview](https://qiekn.github.io/docs/zensical/) | `git clone -b zensical git@github.com:qiekn/docs.git` |
+| mdBook | [Preview](https://qiekn.github.io/docs/mdbook/) | `git clone -b mdbook git@github.com:qiekn/docs.git` |
+
+## Branch Structure
+
+- **`main`** — Landing page + CI/CD (aggregates and deploys all templates)
+- **`zensical`** — Zensical documentation template
+- **`mdbook`** — mdBook documentation template
 
 ## Usage
 
-Install with pip:
+Clone a specific template branch to start a new project:
 
 ```bash
-git clone git@github.com:qiekn/docs.git my-project
-cd my-project
+# Zensical template
+git clone -b zensical git@github.com:qiekn/docs.git my-docs
 
-python -m venv .venv
-.venv\Scripts\activate
-pip install zensical
-
-zensical serve
-```
-
-Install with uv:
-
-```bash
-git clone git@github.com:qiekn/docs.git my-project
-cd my-project
-
-uv init
-uv add --dev zensical
-
-uv run zensical serve
-```
-
-## Structure
-
-```
-.
-├── docs/
-│   ├── images/
-│   ├── stylesheets/
-│   └── index.md
-├── overrides/
-│   └── partials/
-│       └── copyright.html
-├── zensical.toml
-└── .gitignore
+# mdBook template
+git clone -b mdbook git@github.com:qiekn/docs.git my-book
 ```
